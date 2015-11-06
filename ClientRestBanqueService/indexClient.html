@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	
+	
+	<title>Client Banque Service</title>
+	<link rel="stylesheet" type="text/css" href="formeClient.css">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/bootstrap-theme.css" rel="stylesheet">
+	
+	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+	<header id="header" class="page-header">
+		<h1 id="titre-principal">Client Banque service <small>Application qui permet de gérer des comptes bancaires en toute légalité</small></h1>
+	</header>
+	<nav class="navbar navbar-default navbar-static-top">
+		 <div class="container">
+			<ul id="actions" class="nav navbar-nav">
+				<li><button class="btn btn-default" data-toggle="modal" data-target="#createModal">Créer un compte</button></li>
+				<li><button class="btn btn-default" data-toggle="modal" data-target="#soldeModal">Connaître le solde</button></li>
+				<li><button class="btn btn-default" data-toggle="modal" data-target="#depotModal">Dépôt</button></li>
+				<li><button class="btn btn-default" data-toggle="modal" data-target="#retraitModal">Retrait</button></li>
+			</ul>
+		</div>
+	</nav>
+	
+	
+	
+	<section id="maSection">
+		<h1>Bienvenue au sein de l'application Banque Service !</h1>
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="Create" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">Création d'un compte</h5>
+            </div>
+
+            <div class="modal-body">
+                <!-- The form is placed inside the body of modal -->
+                <form id="createForm" method="put" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Propriétaire</label>
+                        <div class="col-xs-5">
+                            <input id="inputProp" type="text" class="form-control" name="proprietaire" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button id="buttonCreate" type="submit" class="btn btn-primary" onsubmit="return testFct()">Créer</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="soldeModal" tabindex="-1" role="dialog" aria-labelledby="Solde" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">Quel est le solde du compte ?</h5>
+            </div>
+
+            <div class="modal-body">
+                <!-- The form is placed inside the body of modal -->
+                <form id="soldeForm" method="get" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">Numéro de compte</label>
+                        <div class="col-xs-2">
+                            <input id="inputNcptsolde" type="text" class="form-control" name="numeroCompte1" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button id="buttonSolde" type="submit" class="btn btn-primary">OK</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="depotModal" tabindex="-1" role="dialog" aria-labelledby="Depot" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">Effectuer un dépôt</h5>
+            </div>
+
+            <div class="modal-body">
+                <!-- The form is placed inside the body of modal -->
+                <form id="depotForm" method="post" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">Numéro de compte</label>
+                        <div class="col-xs-3">
+                            <input id="inputNcptDepot" type="text" class="form-control" name="numeroCompte2" />
+                        </div>
+                    </div>
+					<div class="form-group">
+                        <label class="col-xs-4 control-label">Montant</label>
+                        <div class="col-xs-3">
+                            <input id="inputMontantDepot" type="text" class="form-control" name="montantDepot" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button id="buttonDepot" type="submit" class="btn btn-primary">OK</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="retraitModal" tabindex="-1" role="dialog" aria-labelledby="Retrait" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">Effectuer un retrait</h5>
+            </div>
+
+            <div class="modal-body">
+                <!-- The form is placed inside the body of modal -->
+                <form id="retraitForm" method="post" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">Numéro de compte</label>
+                        <div class="col-xs-3">
+                            <input id="inputNcptRetrait" type="text" class="form-control" name="numeroCompte3" />
+                        </div>
+                    </div>
+					<div class="form-group">
+                        <label class="col-xs-4 control-label">Montant</label>
+                        <div class="col-xs-3">
+                            <input id="inputMontantRetrait" type="text" class="form-control" name="montantRetrait" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button id="buttonRetrait" type="submit" class="btn btn-primary">OK</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="retourRequest">
+	<p id="test"></p>
+	<button id="actualiser" type="button" class="btn btn-default" data-dismiss="modal">Actualiser</button>
+</div>
+
+<script>
+       $(document).ready(function() {
+			$.ajax({
+												type:'GET',
+                                                contentType:'application/xml',
+                                                url:'/RestBanqueService/rest/CompteService/comptes',
+                                                dataType:'xml',
+                                                success:function(xml){
+                                                        $(xml).find('CompteBancaire').each(function(){
+															$.idCompte = $(this).find('idCompte').text();
+															$.proprietaire = $(this).find('proprietaire').text();
+															$.solde = $(this).find('solde').text();
+															
+															$('#test').append("<br>Information compte bancaire : - Numéro de compte : <b>"+$.idCompte+"</b> - propriétaire : <b>"+$.proprietaire+"</b> - solde du compte : <b>"+$.solde+"</b>.");
+														
+														
+														
+														} );
+														
+                                                }
+			});
+
+	   });
+	    $('#buttonSolde').click(function() {
+			
+			$.ajax({
+												type:'GET',
+                                                contentType:'application/xml',
+                                                url:'/RestBanqueService/rest/CompteService/comptes/'+ $('#inputNcptsolde').val(),
+                                                dataType:'xml',
+                                                success:function(xml){
+                                                        $(xml).find('CompteBancaire').each(function(){
+															$.idCompte = $(this).find('idCompte').text();
+															$.solde = $(this).find('solde').text();
+															
+															$('#test').html("<br>Le solde du compte numéro <b>"+$.idCompte+"</b> est de <b>"+$.solde+"</b> euros.");
+														
+														
+														
+														} );
+														
+                                                }
+			});
+			return false;
+			
+	   });
+		$("#buttonCreate").click(function(){
+				
+				$.ajax({
+                                                type:'PUT',
+                                                contentType:'application/x-www-form-urlencoded',
+                                                url:'/RestBanqueService/rest/CompteService/comptes/add?proprietaire=' + $('#inputProp').val(),
+                                                dataType:'xml',
+                                              
+                                        });
+				
+				return false;
+			});
+			
+		 $('#buttonDepot').click(function() {
+										
+                                        $.ajax({
+                                                type:'POST',
+                                                contentType:'application/x-www-form-urlencoded',
+                                                url:'/RestBanqueService/rest/CompteService/comptes/depot?idCompte=' + $('#inputNcptDepot').val() +'&montant=' + $('#inputMontantDepot').val(),
+                                                dataType:'xml',
+                                               
+                                        });
+									
+									return false;
+                                });
+								
+		$('#buttonRetrait').click(function() {
+										
+                                        $.ajax({
+                                                type:'POST',
+                                                contentType:'application/x-www-form-urlencoded',
+                                                url:'/RestBanqueService/rest/CompteService/comptes/retrait?idCompte=' + $('#inputNcptRetrait').val() +'&montant=' + $('#inputMontantRetrait').val(),
+                                                dataType:'xml',
+                                               
+                                        });
+								
+									return false;
+                                });
+								
+		$('#actualiser').click(function() {
+										$("#test").html("");
+                                     	$.ajax({
+												type:'GET',
+                                                contentType:'application/xml',
+                                                url:'/RestBanqueService/rest/CompteService/comptes',
+                                                dataType:'xml',
+                                                success:function(xml){
+                                                        $(xml).find('CompteBancaire').each(function(){
+															$.idCompte = $(this).find('idCompte').text();
+															$.proprietaire = $(this).find('proprietaire').text();
+															$.solde = $(this).find('solde').text();
+															
+															$('#test').append("<br>Information compte bancaire : - Numéro de compte : <b>"+$.idCompte+"</b> - propriétaire : <b>"+$.proprietaire+"</b> - solde du compte : <b>"+$.solde+"</b>.");
+														
+														
+														
+														} );
+														
+                                                }
+			});
+			return false;
+                                });
+
+</script>
+
+	</section>
+	
+	
+	
+
+	<footer id="piedPage">
+		<p>Create by Alexandre and Kévin</p>
+	</footer>
+	
+</body>
+
+</html>

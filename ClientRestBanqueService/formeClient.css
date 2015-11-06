@@ -1,0 +1,35 @@
+#header {
+	text-align : center;
+	background-color: #b2cecf;
+	margin: 0;
+	padding : 0;
+	padding-top: 2%;
+	padding-bottom: 1%;
+}
+
+#titre-principal {
+	margin: 0;
+	padding : 0;
+}
+
+#piedPage {
+	position : absolute;
+	bottom: 0px;
+	width :100%;
+	padding-left : 5%;
+	background-color: #b2cecf;
+}
+
+#actions {
+	margin :1%;
+	width : 50%;
+
+}
+
+#actions li {
+	margin-right :1%;
+}
+
+#maSection{
+	margin : 5%;
+}
